@@ -1,0 +1,525 @@
+{
+    "zabbix_export": {
+        "version": "6.0",
+        "date": "2024-08-19T12:38:20Z",
+        "groups": [
+            {
+                "uuid": "04974a58be8e4b84860090c0779ed541",
+                "name": "SNMP Templates"
+            },
+            {
+                "uuid": "310b72d6dde349619546794251c620ab",
+                "name": "UTX Templates"
+            }
+        ],
+        "templates": [
+            {
+                "uuid": "af0ba6605d4d4a05b15ae724cb8b308f",
+                "template": "TPL SNMP Asterisk",
+                "name": "TPL SNMP Asterisk",
+                "groups": [
+                    {
+                        "name": "SNMP Templates"
+                    },
+                    {
+                        "name": "UTX Templates"
+                    }
+                ],
+                "items": [
+                    {
+                        "uuid": "8dcc82a0efd04b3eb24f89dcc8e38ea6",
+                        "name": "astConfigCallsActive",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": "ASTERISK-MIB::asteriskConfiguration.5.0",
+                        "key": "astConfigCallsActive",
+                        "delay": "5m",
+                        "history": "1w",
+                        "description": "Quantidade de chamadas ativas.\n\nSuportado somente a partir do Asterisk 1.6",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Asterisk Calls"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "7eb9410da0fd4ab3b5e9f70a109ff72d",
+                        "name": "astConfigCallsProcessed",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": "ASTERISK-MIB::asteriskConfiguration.6.0",
+                        "key": "astConfigCallsProcessed",
+                        "delay": "5m",
+                        "history": "1w",
+                        "description": "Chamadas processadas\n\nDispon\u00edvel somente a partir do Asterisk 1.6",
+                        "preprocessing": [
+                            {
+                                "type": "SIMPLE_CHANGE",
+                                "parameters": [
+                                    ""
+                                ]
+                            }
+                        ],
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Asterisk Calls"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "028129c0021a48208224bfb24bb75779",
+                        "name": "astConfigPid",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": "ASTERISK-MIB::astConfigPid.0",
+                        "key": "astConfigPid",
+                        "delay": "2m",
+                        "history": "1w",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Asterisk Configuration"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "70a526fa8a44451f83746449627361d1",
+                                "expression": "nodata(/TPL SNMP Asterisk/astConfigPid,700s)=1",
+                                "name": "Asterisk PID {HOST.NAME}",
+                                "priority": "HIGH",
+                                "dependencies": [
+                                    {
+                                        "name": "{HOST.NAME} Inacessivel",
+                                        "expression": "last(/Template SNMP OS Linux/icmpping[,{$PING},,,],#1)=0 and sum(/Template SNMP OS Linux/icmpping[,{$PING},,,],#2)=0"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "3a8ea36404cf4739989172c94acf10c3",
+                        "name": "astConfigReloadTime",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": "ASTERISK-MIB::astConfigReloadTime.0",
+                        "key": "astConfigReloadTime",
+                        "delay": "5m",
+                        "history": "1w",
+                        "units": "uptime",
+                        "preprocessing": [
+                            {
+                                "type": "MULTIPLIER",
+                                "parameters": [
+                                    "0.01"
+                                ]
+                            }
+                        ],
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Asterisk Configuration"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "606d2aecfe1f44c5891b26966d243dcc",
+                        "name": "astConfigSocket",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": "ASTERISK-MIB::astConfigSocket.0",
+                        "key": "astConfigSocket",
+                        "delay": "1h",
+                        "history": "1w",
+                        "trends": "0",
+                        "value_type": "TEXT",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Asterisk Configuration"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "aad7baa97f5f47d1bdb8138e0595cd03",
+                        "name": "astConfigUpTime",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": "ASTERISK-MIB::astConfigUpTime.0",
+                        "key": "astConfigUpTime",
+                        "delay": "5m",
+                        "history": "1w",
+                        "units": "uptime",
+                        "preprocessing": [
+                            {
+                                "type": "MULTIPLIER",
+                                "parameters": [
+                                    "0.01"
+                                ]
+                            }
+                        ],
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Asterisk Configuration"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "661dc08f87b3409cab68bf4864d30042",
+                                "expression": "last(/TPL SNMP Asterisk/astConfigUpTime)<3600 and time()<230000 and time()>040000",
+                                "name": "Asterisk recarregado {HOST.NAME}",
+                                "priority": "WARNING",
+                                "description": "Verifica se o Asterisk foi recarregado na \u00faltima hora"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "b3ffe26547c047639a28e6be31c55617",
+                        "name": "astCurrentIndication",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": "ASTERISK-MIB::astCurrentIndication.0",
+                        "key": "astCurrentIndication",
+                        "delay": "1h",
+                        "history": "1w",
+                        "trends": "0",
+                        "value_type": "CHAR",
+                        "description": "Asterisk Default indication zone to use",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Asterisk Indications"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "11610adeac2c44b6994d8f40b6a535b3",
+                        "name": "astNumChanBridge",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": "ASTERISK-MIB::asteriskChannels.5.1.0",
+                        "key": "astNumChanBridge",
+                        "delay": "5m",
+                        "history": "1w",
+                        "description": "N\u00famero de canais em Bridge\n\nDispon\u00edvel somente a partir do Asterisk 1.6",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Asterisk Calls"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "85114dfaa12f4ba49761a4f16881ea0b",
+                        "name": "astNumChannels",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": "ASTERISK-MIB::astNumChannels.0",
+                        "key": "astNumChannels",
+                        "delay": "5m",
+                        "history": "1w",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Asterisk Channels"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "ef02802b0ba044f5b9e441ed7ae7ca1d",
+                        "name": "astNumChanTypes",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": "ASTERISK-MIB::astNumChanTypes.0",
+                        "key": "astNumChanTypes",
+                        "delay": "1h",
+                        "history": "1w",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Asterisk Channels"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "8d53ace535db4d4ba8369f69bff4c026",
+                        "name": "astNumIndications",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": "ASTERISK-MIB::astNumIndications.0",
+                        "key": "astNumIndications",
+                        "delay": "1h",
+                        "history": "1w",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Asterisk Indications"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "bc1a8375e50e4e3da0e6c5a5b618a3f5",
+                        "name": "astNumModules",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": "ASTERISK-MIB::astNumModules.0",
+                        "key": "astNumModules",
+                        "delay": "1h",
+                        "history": "1w",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Asterisk Modules"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "f8fc7ea0a0734d1b94054c2d18aaa550",
+                        "name": "astVersionString",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": "ASTERISK-MIB::astVersionString.0",
+                        "key": "astVersionString",
+                        "delay": "1h",
+                        "history": "1w",
+                        "trends": "0",
+                        "value_type": "TEXT",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Asterisk Version"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "efae015b8574430ea8f0a7171137196e",
+                        "name": "astVersionTag",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": "ASTERISK-MIB::astVersionTag.0",
+                        "key": "astVersionTag",
+                        "delay": "1h",
+                        "history": "1w",
+                        "request_method": "POST",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Asterisk Version"
+                            }
+                        ]
+                    }
+                ],
+                "discovery_rules": [
+                    {
+                        "uuid": "853f3ddf3f9643b29bdbb6a936344969",
+                        "name": "astChanTypeName",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": "discovery[{#SNMPVALUE},ASTERISK-MIB::astChanTypeName]",
+                        "key": "astChanTypeName",
+                        "delay": "30s",
+                        "filter": {
+                            "conditions": [
+                                {
+                                    "macro": "{#SNMPVALUE}",
+                                    "value": "SIP|DGV|IAX|Khomp|DAHDI",
+                                    "formulaid": "A"
+                                }
+                            ]
+                        },
+                        "lifetime": "1w",
+                        "item_prototypes": [
+                            {
+                                "uuid": "3a0e5310ed3a428fb35cea5d5e67f170",
+                                "name": "astChanTypeChannels {#SNMPVALUE}",
+                                "type": "SNMP_AGENT",
+                                "snmp_oid": "ASTERISK-MIB::astChanTypeChannels.{#SNMPINDEX}",
+                                "key": "astChanTypeChannels[{#SNMPVALUE}]",
+                                "delay": "30s",
+                                "request_method": "POST",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "Asterisk Channels"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "796dead32c924bcd974153ded57849f3",
+                                "name": "astChanTypeDesc {#SNMPVALUE}",
+                                "type": "SNMP_AGENT",
+                                "snmp_oid": "ASTERISK-MIB::astChanTypeDesc.{#SNMPINDEX}",
+                                "key": "astChanTypeDesc[{#SNMPVALUE}]",
+                                "delay": "1h",
+                                "trends": "0",
+                                "status": "DISABLED",
+                                "value_type": "TEXT",
+                                "request_method": "POST",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "Asterisk Channels"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "da28331bd8f4430990ca1cce3fb0f036",
+                                "name": "astChanTypeDeviceState {#SNMPVALUE}",
+                                "type": "SNMP_AGENT",
+                                "snmp_oid": "ASTERISK-MIB::astChanTypeDeviceState.{#SNMPINDEX}",
+                                "key": "astChanTypeDeviceState[{#SNMPVALUE}]",
+                                "delay": "30s",
+                                "status": "DISABLED",
+                                "request_method": "POST",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "Asterisk Channels"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "58e4ca1f48914caba74171f6b4a0d547",
+                                "name": "astChanTypeIndications {#SNMPVALUE}",
+                                "type": "SNMP_AGENT",
+                                "snmp_oid": "ASTERISK-MIB::astChanTypeIndications.{#SNMPINDEX}",
+                                "key": "astChanTypeIndications[{#SNMPVALUE}]",
+                                "delay": "30s",
+                                "status": "DISABLED",
+                                "request_method": "POST",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "Asterisk Channels"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "851077d8088d4e3ca8ff6c41b829bbc2",
+                                "name": "astChanTypeName {#SNMPVALUE}",
+                                "type": "SNMP_AGENT",
+                                "snmp_oid": "ASTERISK-MIB::astChanTypeName.{#SNMPINDEX}",
+                                "key": "astChanTypeName[{#SNMPVALUE}]",
+                                "delay": "1h",
+                                "trends": "0",
+                                "status": "DISABLED",
+                                "value_type": "TEXT",
+                                "request_method": "POST",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "Asterisk Channels"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "fea52d836331490d9705f7ebfd9312f7",
+                                "name": "astChanTypeTransfer {#SNMPVALUE}",
+                                "type": "SNMP_AGENT",
+                                "snmp_oid": "ASTERISK-MIB::astChanTypeTransfer.{#SNMPINDEX}",
+                                "key": "astChanTypeTransfer[{#SNMPVALUE}]",
+                                "delay": "30s",
+                                "status": "DISABLED",
+                                "request_method": "POST",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "Asterisk Channels"
+                                    }
+                                ]
+                            }
+                        ],
+                        "graph_prototypes": [
+                            {
+                                "uuid": "d0bcd1cf7ea64d4c91c096d78bb04d6b",
+                                "name": "Canais ocupados {#SNMPVALUE}",
+                                "graph_items": [
+                                    {
+                                        "color": "C80000",
+                                        "item": {
+                                            "host": "TPL SNMP Asterisk",
+                                            "key": "astChanTypeChannels[{#SNMPVALUE}]"
+                                        }
+                                    },
+                                    {
+                                        "sortorder": "1",
+                                        "color": "00C800",
+                                        "item": {
+                                            "host": "TPL SNMP Asterisk",
+                                            "key": "astNumChannels"
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "request_method": "POST"
+                    },
+                    {
+                        "uuid": "629128d331b44ef4820025c803cae7eb",
+                        "name": "astIndCountry",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": "discovery[{#SNMPVALUE},ASTERISK-MIB::astIndCountry]",
+                        "key": "astIndCountry",
+                        "delay": "30s",
+                        "status": "DISABLED",
+                        "lifetime": "1w",
+                        "item_prototypes": [
+                            {
+                                "uuid": "0f146bc6e9104f1c8b38ad55de514299",
+                                "name": "astIndCountry {#SNMPVALUE}",
+                                "type": "SNMP_AGENT",
+                                "snmp_oid": "ASTERISK-MIB::astIndCountry.{#SNMPINDEX}",
+                                "key": "astIndCountry[{#SNMPVALUE}]",
+                                "delay": "30s",
+                                "trends": "0",
+                                "status": "DISABLED",
+                                "value_type": "TEXT",
+                                "request_method": "POST",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "Asterisk Indications"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "cfc4e91b840b4e11991db0128afcce99",
+                                "name": "astIndDescription {#SNMPVALUE}",
+                                "type": "SNMP_AGENT",
+                                "snmp_oid": "ASTERISK-MIB::astIndDescription.{#SNMPINDEX}",
+                                "key": "astIndDescription[{#SNMPVALUE}]",
+                                "delay": "30s",
+                                "trends": "0",
+                                "status": "DISABLED",
+                                "value_type": "TEXT",
+                                "request_method": "POST",
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "Asterisk Indications"
+                                    }
+                                ]
+                            }
+                        ],
+                        "request_method": "POST"
+                    }
+                ]
+            }
+        ],
+        "graphs": [
+            {
+                "uuid": "78e3620696a747a193b95d3ffa39ade0",
+                "name": "Chamadas ativas",
+                "graph_items": [
+                    {
+                        "color": "00C800",
+                        "item": {
+                            "host": "TPL SNMP Asterisk",
+                            "key": "astConfigCallsActive"
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}
