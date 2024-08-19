@@ -41,12 +41,14 @@ Abra o arquivo de configuração `snmpd.conf` com o editor `vim`:
   
 
 Para iniciar o processo:
+inicia o serviço SNMP
 
 `sudo systemctl start snmpd`
-                  # inicia o serviço SNMP
+                 
+configura o serviço SNMP para iniciar automaticamente durante a inicialização do sistema
 
 sudo systemctl enable snmpd
-                  # configura o serviço SNMP para iniciar automaticamente durante a inicialização do sistema
+             
 
 Adicione ou modifique as seguintes linhas no arquivo `snmpd.conf`:
     ```conf
