@@ -49,7 +49,7 @@ inicia o serviço SNMP
                  
 configura o serviço SNMP para iniciar automaticamente durante a inicialização do sistema
 
-sudo systemctl enable snmpd
+`sudo systemctl enable snmpd`
              
 
 Adicione ou modifique as seguintes linhas no arquivo `snmpd.conf`:
