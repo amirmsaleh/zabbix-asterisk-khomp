@@ -22,8 +22,8 @@ Para fazer o monitoramento via SNMP na sua máquina é nescessário:
 O processo de instalação do SNMP e suas ferramentas no seu sistema varia de acordo com o sistema operacional que você está usando.
 
 **SUSE/OpenSUSE**:
-```sh
-sudo zypper install net-snmp net-snmp-utils
+
+`sudo zypper install net-snmp net-snmp-utils`
                   # instala os pacotes necessários para SNMP e suas ferramentas
 
 **Configuração**
@@ -31,18 +31,18 @@ sudo zypper install net-snmp net-snmp-utils
 Para realizar o processo de configuração, siga os passos abaixo:
 
 Entre no diretório de configuração do SNMP:
-    ```sh
-    cd /etc/snmp
-    ```
+    
+ `cd /etc/snmp`
+  
 
 Abra o arquivo de configuração `snmpd.conf` com o editor `vim`:
-    ```sh
-    vim snmpd.conf
-    ```
+
+    `vim snmpd.conf`
+  
 
 Para iniciar o processo:
 
-sudo systemctl start snmpd
+`sudo systemctl start snmpd`
                   # inicia o serviço SNMP
 
 sudo systemctl enable snmpd
