@@ -37,7 +37,7 @@ Entre no diretório de configuração do SNMP:
 
 Abra o arquivo de configuração `snmpd.conf` com o editor `vim`:
 
-    `vim snmpd.conf`
+    vim snmpd.conf
   
 
 Para iniciar o processo:
