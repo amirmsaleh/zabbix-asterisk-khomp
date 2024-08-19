@@ -17,10 +17,14 @@ Para fazer o monitoramento via SNMP na sua máquina é nescessário:
     
 ## Instalação do SNMP
 
+**Configuração do SNMP**
+
 O processo de instalação do SNMP e suas ferramentas no seu sistema varia de acordo com o sistema operacional que você está usando.
-SUSE/OpenSUSE: sudo zypper install net-snmp net-snmp-utils
-Para iniciar o processo:sudo systemctl start snmpd ,  sudo systemctl enable snmpd
-Esses comandos instalarão e configurarão o SNMP para que o serviço inicie automaticamente durante a inicialização do sistema.
+
+**SUSE/OpenSUSE**:
+```sh
+sudo zypper install net-snmp net-snmp-utils
+                  # instala os pacotes necessários para SNMP e suas ferramentas
 
 **Configuração**
 
@@ -35,6 +39,14 @@ Abra o arquivo de configuração `snmpd.conf` com o editor `vim`:
     ```sh
     vim snmpd.conf
     ```
+
+Para iniciar o processo:
+
+sudo systemctl start snmpd
+                  # inicia o serviço SNMP
+
+sudo systemctl enable snmpd
+                  # configura o serviço SNMP para iniciar automaticamente durante a inicialização do sistema
 
 Adicione ou modifique as seguintes linhas no arquivo `snmpd.conf`:
     ```conf
@@ -71,7 +83,6 @@ Após as alterações, reinicie o serviço SNMP para aplicar as mudanças:
     ```sh
     systemctl restart snmpd.service
     ```
-
 
 
 Nesta configuração SNMP, criamos um grupo somente leitura que se conecta a um dispositivo exclusivo que possui um endereço IP 172.28.17.7. A chave public é usada para proteger a conexão com este dispositivo. Os membros da comunidade só podem monitorar o que está acontecendo e não alterar as configurações.
