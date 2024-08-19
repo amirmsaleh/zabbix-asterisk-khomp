@@ -24,34 +24,57 @@ Esses comandos instalarão e configurarão o SNMP para que o serviço inicie aut
 
 **Configuração**
 
-Para realizar o processo de configuração é preciso entrar no arquivo correspondente: cd /etc/snmp
-Dentro deste diretório: vim snmpd.conf
+Para realizar o processo de configuração, siga os passos abaixo:
 
-snmpd.conf
-"com2sec readonly  172.28.17.7 utx_snmp_1384611681
+Entre no diretório de configuração do SNMP:
+    ```sh
+    cd /etc/snmp
+    ```
 
-group MyROGroup v1         readonly
-group MyROGroup v2c        readonly
+Abra o arquivo de configuração `snmpd.conf` com o editor `vim`:
+    ```sh
+    vim snmpd.conf
+    ```
 
-view    all           included   .1
+Adicione ou modifique as seguintes linhas no arquivo `snmpd.conf`:
+    ```conf
+    com2sec readonly  172.28.17.7 public
+                     # define a comunidade e o endereço IP para leitura
 
-       "#"group     context   sec.model sec.level prefix read  write notif
-access MyROGroup ""        any       noauth    exact  all   none  none
+    group MyROGroup v1         readonly
+    group MyROGroup v2c        readonly
+                     # define grupos de acesso para SNMPv1 e SNMPv2c
 
-proxy -v 2c -c khomp localhost:14161 .1.3.6.1.4.1.32624
+    view    all           included   .1
+                     # inclui todas as MIBs para visualização
 
-syslocation Ultrix
-syscontact suporte@ultrix.srv.br
+    #group     context   sec.model sec.level prefix read  write notif
+    access MyROGroup ""        any       noauth    exact  all   none  none
+                     # define as permissões de acesso para o grupo MyROGroup
 
-dontLogTCPWrappersConnects yes
+    proxy -v 2c -c khomp localhost:14161 .1.3.6.1.4.1.32624
+                     # define o proxy SNMP, escutando na porta 14161 e encaminhando para o OID especificado
 
-master agentx
-agentXPerms 0660 0550 nobody nobody"
+    syslocation Ultrix
+    syscontact Sysadmin (root@localhost)
+                     # define a localização do sistema e o contato
 
-Após isso dê o comando: systemctl restart snmpd.service para reiniciar o serviço.
+    dontLogTCPWrappersConnects yes
+                     # evita logar conexões TCP wrappers
+
+    master agentx
+    agentXPerms 0660 0550 nobody nobody
+                     # configura as permissões para o protocolo AgentX
+    ```
+
+Após as alterações, reinicie o serviço SNMP para aplicar as mudanças:
+    ```sh
+    systemctl restart snmpd.service
+    ```
 
 
-Nesta configuração SNMP, criamos um grupo somente leitura que se conecta a um dispositivo exclusivo que possui um endereço IP 172.28.17.7. A chave utx_snmp_1384611681 é usada para proteger a conexão com este dispositivo. Os membros da comunidade só podem monitorar o que está acontecendo e não alterar as configurações.
+
+Nesta configuração SNMP, criamos um grupo somente leitura que se conecta a um dispositivo exclusivo que possui um endereço IP 172.28.17.7. A chave public é usada para proteger a conexão com este dispositivo. Os membros da comunidade só podem monitorar o que está acontecendo e não alterar as configurações.
 
 A seguir, definimos um grupo de acesso chamado MyROGroup que usa as versões do protocolo SNMP v1 e v2c. Este grupo traz ferramentas para o grupo de leitura, permitindo-lhes acessar informações mas ler.
 
@@ -59,7 +82,7 @@ Para melhorar a acessibilidade, definimos todas as visualizações, que permitem
 
 Outro fator nesta configuração é a configuração do agente SNMP. O comando proxy redireciona as solicitações SNMP recebidas da porta 14161 para a porta SNMP (ou seja, 161). No exemplo, o agente foi alterado para SNMP versão 2c, utilizando a comunidade khomp, e direcionou as solicitações para localhost na porta 14161 com identificador de informações de acesso .1.3.6.1.4.1.32624. Isso permite que o servidor SNMP local atue como intermediário, enviando consultas SNMP recebidas em portas que estão conectadas às portas SNMP padrão, coletando informações do dispositivo de destino e retornando as informações.
 
-Além disso, esta configuração contém informações administrativas como o local onde o dispositivo está definido como “Ultrix” e o e-mail de suporte (supporte@ultrix.srv.br) se necessário.
+Além disso, esta configuração contém informações administrativas como o local onde o dispositivo está definido como “localhost” e o suporte (Sysadmin (root@localhost)) se necessário.
 
 No final, foram corrigidas opções avançadas, como optar por não registrar algumas conexões (dontLogTCPWrappersConnects sim) e configurar SNMP para o agente mestre (agente mestre x). Isso faz com que o sistema SNMP seja confiável e capaz de gerenciar vários dispositivos de maneira sistemática e segura.
 
