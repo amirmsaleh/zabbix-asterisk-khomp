@@ -91,7 +91,7 @@ A seguir, definimos um grupo de acesso chamado MyROGroup que usa as versões do 
 
 Para melhorar a acessibilidade, definimos todas as visualizações, que permitem ver mais informações dentro do dispositivo. A configuração também inclui regras de acesso, onde sabemos que o grupo MyROGroup pode ver tudo, mas não pode modificar ou receber notificações.
 
-Outro fator nesta configuração é a configuração do agente SNMP. O comando proxy redireciona as solicitações SNMP recebidas da porta 14161 para a porta SNMP (ou seja, 161). No exemplo, o agente foi alterado para SNMP versão 2c, utilizando a comunidade khomp, e direcionou as solicitações para localhost na porta 14161 com identificador de informações de acesso .1.3.6.1.4.1.32624. Isso permite que o servidor SNMP local atue como intermediário, enviando consultas SNMP recebidas em portas que estão conectadas às portas SNMP padrão, coletando informações do dispositivo de destino e retornando as informações.
+Outro fator nesta configuração é a configuração do agente SNMP. O comando proxy redireciona as solicitações SNMP recebidas da porta 14161 para a porta SNMP (ou seja, 161). No exemplo, o agente foi alterado para SNMP versão 2c, utilizando a comunidade pública, e direcionou as solicitações para localhost na porta 14161 com identificador de informações de acesso .1.3.6.1.4.1.32624. Isso permite que o servidor SNMP local atue como intermediário, enviando consultas SNMP recebidas em portas que estão conectadas às portas SNMP padrão, coletando informações do dispositivo de destino e retornando as informações.
 
 Além disso, esta configuração contém informações administrativas como o local onde o dispositivo está definido como “localhost” e o suporte (Sysadmin (root@localhost)) se necessário.
 
