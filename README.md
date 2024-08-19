@@ -14,8 +14,6 @@ Para fazer o monitoramento via SNMP na sua máquina é nescessário:
 - Configuração do Zabbix  
    - Hosts
    - Templates
- 
-     `sox audio.ogg -t raw -r 8000 -e signed-integer -b 16 -c 1 audio.sln`
 
     
 ## Instalação do SNMP
@@ -40,7 +38,8 @@ Entre no diretório de configuração do SNMP:
 
 Abra o arquivo de configuração `snmpd.conf` com o editor `vim`:
 
-    vim snmpd.conf
+  
+ `vim snmpd.conf`
   
 
 Para iniciar o processo:
