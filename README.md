@@ -10,7 +10,7 @@ Data: 20240819
 Para fazer o monitoramento via SNMP na sua máquina é nescessário:
   
 - Instalação do SNMP  
-   - Configuração do SNMP  
+   - Configuração do SNMP 
 - Configuração do Zabbix  
    - Hosts
    - Templates
