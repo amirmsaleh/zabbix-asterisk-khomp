@@ -35,7 +35,7 @@ group MyROGroup v2c        readonly
 
 view    all           included   .1
 
-#       group     context   sec.model sec.level prefix read  write notif
+       group     context   sec.model sec.level prefix read  write notif
 access MyROGroup ""        any       noauth    exact  all   none  none
 
 proxy -v 2c -c khomp localhost:14161 .1.3.6.1.4.1.32624
