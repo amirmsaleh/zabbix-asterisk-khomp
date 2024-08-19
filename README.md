@@ -53,7 +53,7 @@ sudo systemctl enable snmpd
              
 
 Adicione ou modifique as seguintes linhas no arquivo `snmpd.conf`:
-    ```conf
+  ```conf
     com2sec readonly  172.28.17.7 public
                      # define a comunidade e o endereço IP para leitura
 
