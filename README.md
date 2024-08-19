@@ -144,7 +144,7 @@ Importar um Template:
 Clique no botão "Import" no canto superior direito.
 Selecionar o Arquivo de Template:
 
-Na página de importação, clique em "Choose File" e selecione o arquivo XML do template SNMP que você deseja importar. Se você ainda não tem um arquivo XML, você pode baixar templates SNMP prontos da Zabbix Share.
+Na página de importação, clique em "Choose File" e selecione o arquivo JSON do template SNMP que você deseja importar. Se você ainda não tem um arquivo XML, você pode baixar templates SNMP prontos da Zabbix Share.
 Configurar Importação:
 
 Options: Escolha as opções apropriadas para sua importação. As opções padrão geralmente são suficientes.
