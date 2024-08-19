@@ -83,7 +83,6 @@ Após as alterações, reinicie o serviço SNMP para aplicar as mudanças:
     ```sh
     systemctl restart snmpd.service
     ```
- ```
 
 Nesta configuração SNMP, criamos um grupo somente leitura que se conecta a um dispositivo exclusivo que possui um endereço IP 172.28.17.7. A chave public é usada para proteger a conexão com este dispositivo. Os membros da comunidade só podem monitorar o que está acontecendo e não alterar as configurações.
 
