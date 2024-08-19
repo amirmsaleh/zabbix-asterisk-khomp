@@ -28,14 +28,14 @@ Para realizar o processo de configuração é preciso entrar no arquivo correspo
 Dentro deste diretório: vim snmpd.conf
 
 snmpd.conf
-com2sec readonly  172.28.17.7 utx_snmp_1384611681
+"com2sec readonly  172.28.17.7 utx_snmp_1384611681
 
 group MyROGroup v1         readonly
 group MyROGroup v2c        readonly
 
 view    all           included   .1
 
-       group     context   sec.model sec.level prefix read  write notif
+       "#"group     context   sec.model sec.level prefix read  write notif
 access MyROGroup ""        any       noauth    exact  all   none  none
 
 proxy -v 2c -c khomp localhost:14161 .1.3.6.1.4.1.32624
@@ -46,7 +46,10 @@ syscontact suporte@ultrix.srv.br
 dontLogTCPWrappersConnects yes
 
 master agentx
-agentXPerms 0660 0550 nobody nobody
+agentXPerms 0660 0550 nobody nobody"
+
+Após isso dê o comando: systemctl restart snmpd.service para reiniciar o serviço.
+
 
 Nesta configuração SNMP, criamos um grupo somente leitura que se conecta a um dispositivo exclusivo que possui um endereço IP 172.28.17.7. A chave utx_snmp_1384611681 é usada para proteger a conexão com este dispositivo. Os membros da comunidade só podem monitorar o que está acontecendo e não alterar as configurações.
 
