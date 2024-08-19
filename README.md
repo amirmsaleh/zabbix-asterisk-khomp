@@ -97,7 +97,7 @@ Além disso, esta configuração contém informações administrativas como o lo
 
 No final, foram corrigidas opções avançadas, como optar por não registrar algumas conexões (dontLogTCPWrappersConnects sim) e configurar SNMP para o agente mestre (agente mestre x). Isso faz com que o sistema SNMP seja confiável e capaz de gerenciar vários dispositivos de maneira sistemática e segura.
 
-### Configuração Zabbix
+## Configuração Zabbix
 
 **Hosts**
 
