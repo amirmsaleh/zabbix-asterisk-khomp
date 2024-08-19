@@ -83,7 +83,8 @@ Adicione ou modifique as seguintes linhas no arquivo `snmpd.conf`:
                      # configura as permissões para o protocolo AgentX
     ```
 
-Após as alterações, reinicie o serviço SNMP para aplicar as mudanças:
+ 
+  Após as alterações, reinicie o serviço SNMP para aplicar as mudanças:
  `systemctl restart snmpd.service`
 
 
