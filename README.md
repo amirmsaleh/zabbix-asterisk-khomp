@@ -125,6 +125,21 @@ Na seção "SNMP Interfaces", você não configurará diretamente a comunidade a
 
 Atribuir um Template SNMP:
 
+Vá para a Seção de Importação de Templates:
+
+No menu superior, clique em "Configuration" e depois em "Templates".
+Importar um Template:
+
+Clique no botão "Import" no canto superior direito.
+Selecionar o Arquivo de Template:
+
+Na página de importação, clique em "Choose File" e selecione o arquivo XML do template SNMP que você deseja importar. Se você ainda não tem um arquivo XML, você pode baixar templates SNMP prontos da Zabbix Share.
+Configurar Importação:
+
+Options: Escolha as opções apropriadas para sua importação. As opções padrão geralmente são suficientes.
+Templates: Confirme que o template SNMP desejado está selecionado.
+Clique em "Import" para adicionar o template ao Zabbix.
+
 Na seção "Templates", clique em "Link new templates".
 Na caixa de pesquisa, procure por "Template SNMP" ou "Template App SNMP". Dependendo da sua configuração, você pode ter diferentes templates SNMP pré-configurados.
 Selecione um template apropriado (por exemplo, Template App SNMP Generic) e clique em "Add".
