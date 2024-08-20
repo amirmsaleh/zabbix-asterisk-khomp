@@ -184,7 +184,7 @@ KHOMP-MIB
 
 Para vizualizar a MIB do Khomp
 
-`/etc/khomp`
+`cd /etc/khomp`
 
 Realizando o comando `ls` podera vizualizar a sua KHOMP-MIB
 
