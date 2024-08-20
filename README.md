@@ -158,6 +158,9 @@ iso.3.6.1.4.1.22736.1.4.2.0 = STRING: "us"
 
 ## MIBS
 
+ Cada objeto na MIB tem um identificador único chamado OID, que é uma sequência de números separados por pontos (por exemplo, 1.3.6.1.2.1.2.2.1.1). Os OIDs são usados para acessar os dados específicos 
+ no dispositivo.
+
 **Acesso as MIBS**
 
 Para acessar a MIB Khomp e Asterisk digite o comando:
