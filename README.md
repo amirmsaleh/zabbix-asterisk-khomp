@@ -99,7 +99,8 @@ A seguir, definimos um grupo de acesso chamado MyROGroup que usa as versões do 
 
 Para melhorar a acessibilidade, definimos todas as visualizações, que permitem ver mais informações dentro do dispositivo. A configuração também inclui regras de acesso, onde sabemos que o grupo MyROGroup pode ver tudo, mas não pode modificar ou receber notificações.
 
-O comando proxy `proxy -v 2c -c khomp localhost:14161 .1.3.6.1.4.1.32624` redireciona as solicitações SNMP recebidas da porta 14161 para a porta SNMP (ou seja, 161) Além de ser responsável pelo monitoramento do Khomp.Isso permite que o servidor SNMP local atue como intermediário, enviando consultas SNMP recebidas em portas que estão conectadas às portas SNMP padrão, coletando informações do dispositivo de destino e retornando as informações. Também o comando `master agentx agentxPerms 0660 0550 nobody nobody` ter a funcionalidade de monitoramento do Asterisk.
+O comando proxy `proxy -v 2c -c khomp localhost:14161 .1.3.6.1.4.1.32624` redireciona as solicitações SNMP recebidas da porta 14161 para a porta SNMP (ou seja, 161) Além de ser responsável pelo monitoramento do Khomp.Isso permite que o servidor SNMP local atue como intermediário, enviando consultas SNMP recebidas em portas que estão conectadas às portas SNMP padrão, coletando informações do dispositivo de destino e retornando as informações. 
+Também o comando `master agentx agentxPerms 0660 0550 nobody nobody` ter a funcionalidade de monitoramento do Asterisk.
 
 Além disso, esta configuração contém informações administrativas como o local onde o dispositivo está definido como “localhost” e o suporte (Sysadmin (root@localhost)) se necessário.
 
@@ -119,7 +120,7 @@ Edite o arquivo de configuração Asterisk res_snmp.conf para ativar a integraç
  ```
 
 Reinicie o serviço Asterisk.
- `service asterisk restart`
+`service asterisk restart`
 
 Conecte-se ao console do Asterisk e verifique se o módulo SNMP do Asterisk foi carregado.
 ```
