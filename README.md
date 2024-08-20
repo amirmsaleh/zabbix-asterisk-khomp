@@ -1,4 +1,4 @@
-# Monitoramento Asterisk-Khomp EBS Zabbix
+# Monitoramento do Asterisk e Khomp EBS através do Zabbix com SNMP
 
 Templates Zabbix para monitoramento SNMP do Asterisk e Khomp EBS
 Mantenedor: Igor Silva
