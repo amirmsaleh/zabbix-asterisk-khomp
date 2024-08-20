@@ -10,7 +10,7 @@ Data: 20240819
 
 # Introdução
 
-Para fazer o monitoramento via SNMP **Asterisk** e **Khomp** na sua máquina disponibilizamos dois Templates Zabbix (TemplateAsterisk.json, TemplateKhomp.json) , para utiliza-los é nescessário:
+Para fazer o monitoramento via SNMP **Asterisk** e **Khomp** na sua máquina disponibilizamos dois Templates Zabbix (TemplateAsterisk.json, TemplateKhomp.json) criados apartir do manual da **MIB** , para utiliza-los é nescessário:
   
 - Instalação do SNMP  
    - Configuração do SNMP
@@ -102,7 +102,7 @@ Para melhorar a acessibilidade, definimos todas as visualizações, que permitem
 
 O comando proxy `proxy -v 2c -c khomp localhost:14161 .1.3.6.1.4.1.32624` redireciona as solicitações SNMP recebidas da porta 14161 para a porta SNMP (ou seja, 161) Além de ser responsável pelo monitoramento do Khomp.Isso permite que o servidor SNMP local atue como intermediário, enviando consultas SNMP recebidas em portas que estão conectadas às portas SNMP padrão, coletando informações do dispositivo de destino e retornando as informações. 
 
-Também o comando `master agentx agentxPerms 0660 0550 nobody nobody` ter a funcionalidade de monitoramento do Asterisk.
+Também o comando `master agentx agentxPerms 0660 0550 nobody nobody` tem a funcionalidade de monitoramento do Asterisk.
 
 Além disso, esta configuração contém informações administrativas como o local onde o dispositivo está definido como “localhost” e o suporte (Sysadmin (root@localhost)) se necessário.
 
@@ -155,6 +155,12 @@ iso.3.6.1.4.1.22736.1.3.1.0 = INTEGER: 338
 iso.3.6.1.4.1.22736.1.4.1.0 = INTEGER: 40
 iso.3.6.1.4.1.22736.1.4.2.0 = STRING: "us"
 ```
+
+## MIBS
+
+
+
+
  
 ### Configuração Zabbix
 
