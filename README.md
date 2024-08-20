@@ -1,4 +1,5 @@
 # Monitoramento Asterisk-Khomp EBS Zabbix
+
 Templates Zabbix para monitoramento SNMP do Asterisk e Khomp EBS
 Mantenedor: Igor Silva
 E-mail: igor@ultrix.pro 
@@ -9,7 +10,7 @@ Data: 20240819
 
 # Introdução
 
-Para fazer o monitoramento via SNMP **Asterisk** e **Khomp** na sua máquina disponibilizamos dois Templates Zabbix, para utiliza-los é nescessário:
+Para fazer o monitoramento via SNMP **Asterisk** e **Khomp** na sua máquina disponibilizamos dois Templates Zabbix (TemplateAsterisk.json, TemplateKhomp.json) , para utiliza-los é nescessário:
   
 - Instalação do SNMP  
    - Configuração do SNMP
