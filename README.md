@@ -1,16 +1,21 @@
-# Zabbix-Asterisk-Khomp
+# Monitoramento Asterisk-Khomp EBS Zabbix
 Templates Zabbix para monitoramento SNMP do Asterisk e Khomp EBS
 Mantenedor: Igor Silva
+E-mail: igor@ultrix.pro 
 Estado: Finalizado
 Data: 20240819
 
 (c) Copyright 2024, Ultrix
 
 # Introdução
-Para fazer o monitoramento via SNMP na sua máquina é nescessário:
+
+Para fazer o monitoramento via SNMP **Asterisk** e **Khomp** na sua máquina disponibilizamos dois Templates Zabbix, para utiliza-los é nescessário:
   
 - Instalação do SNMP  
-   - Configuração do SNMP 
+   - Configuração do SNMP
+   - Configuração do SNMP Asterisk
+- MIBS Khomp - Asterisk
+   - Acesso as MIBS
 - Configuração do Zabbix  
    - Hosts
    - Templates
@@ -27,7 +32,7 @@ instala os pacotes necessários para SNMP e suas ferramentas
 
 `sudo zypper install net-snmp net-snmp-utils`
 
-**Configuração**
+**Configuração SNMP**
 
 Para realizar o processo de configuração, siga os passos abaixo:
 
@@ -94,12 +99,59 @@ A seguir, definimos um grupo de acesso chamado MyROGroup que usa as versões do 
 
 Para melhorar a acessibilidade, definimos todas as visualizações, que permitem ver mais informações dentro do dispositivo. A configuração também inclui regras de acesso, onde sabemos que o grupo MyROGroup pode ver tudo, mas não pode modificar ou receber notificações.
 
-Outro fator nesta configuração é a configuração do agente SNMP. O comando proxy redireciona as solicitações SNMP recebidas da porta 14161 para a porta SNMP (ou seja, 161). No exemplo, o agente foi alterado para SNMP versão 2c, utilizando a comunidade pública, e direcionou as solicitações para localhost na porta 14161 com identificador de informações de acesso .1.3.6.1.4.1.32624. Isso permite que o servidor SNMP local atue como intermediário, enviando consultas SNMP recebidas em portas que estão conectadas às portas SNMP padrão, coletando informações do dispositivo de destino e retornando as informações.
+O comando proxy `proxy -v 2c -c khomp localhost:14161 .1.3.6.1.4.1.32624` redireciona as solicitações SNMP recebidas da porta 14161 para a porta SNMP (ou seja, 161) Além de ser responsável pelo monitoramento do Khomp.Isso permite que o servidor SNMP local atue como intermediário, enviando consultas SNMP recebidas em portas que estão conectadas às portas SNMP padrão, coletando informações do dispositivo de destino e retornando as informações. Também o comando `master agentx agentxPerms 0660 0550 nobody nobody` ter a funcionalidade de monitoramento do Asterisk.
 
 Além disso, esta configuração contém informações administrativas como o local onde o dispositivo está definido como “localhost” e o suporte (Sysadmin (root@localhost)) se necessário.
 
 No final, foram corrigidas opções avançadas, como optar por não registrar algumas conexões (dontLogTCPWrappersConnects sim) e configurar SNMP para o agente mestre (agente mestre x). Isso faz com que o sistema SNMP seja confiável e capaz de gerenciar vários dispositivos de maneira sistemática e segura.
 
+
+
+**Configuração do SNMP Asterisk**
+
+Edite o arquivo de configuração Asterisk res_snmp.conf para ativar a integração SNMP.
+ `vi /etc/asterisk/res_snmp.conf`
+
+ Adicione as seguintes linhas ao final do arquivo res_snmp.conf.
+ ```
+ subagent = yes
+ enabled = yes
+ ```
+
+Reinicie o serviço Asterisk.
+ `service asterisk restart`
+
+Conecte-se ao console do Asterisk e verifique se o módulo SNMP do Asterisk foi carregado.
+```
+asterisk -rv
+module show like snmp
+ ```
+
+Em nosso exemplo, podemos ver que o módulo SNMP do Asterisk foi carregado.
+```
+Module             Description                    Use Count  Status      Support Level
+res_snmp.so        SNMP [Sub]Agent for Asterisk   0          Running     extended
+1 modules loaded
+```
+
+Para testar sua configuração SNMP do Asterisk, use o seguinte comando.
+`snmpwalk -v2c -c public 127.0.0.1 1.3.6.1.4.1.22736.1`
+
+Você deve ver uma saída SNMP:
+```
+iso.3.6.1.4.1.22736.1.1.1.0 = STRING: "16.5.1"
+iso.3.6.1.4.1.22736.1.1.2.0 = Gauge32: 160501
+iso.3.6.1.4.1.22736.1.2.1.0 = Timeticks: (51023) 0:08:30.23
+iso.3.6.1.4.1.22736.1.2.2.0 = Timeticks: (51023) 0:08:30.23
+iso.3.6.1.4.1.22736.1.2.3.0 = INTEGER: 8179
+iso.3.6.1.4.1.22736.1.2.4.0 = STRING: "https://d1ny9casiyy5u5.cloudfront.net/var/run/asterisk/asterisk.ctl"
+iso.3.6.1.4.1.22736.1.2.5.0 = Gauge32: 0
+iso.3.6.1.4.1.22736.1.2.6.0 = Counter32: 0
+iso.3.6.1.4.1.22736.1.3.1.0 = INTEGER: 338
+iso.3.6.1.4.1.22736.1.4.1.0 = INTEGER: 40
+iso.3.6.1.4.1.22736.1.4.2.0 = STRING: "us"
+```
+ 
 ### Configuração Zabbix
 
 **Hosts**
