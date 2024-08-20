@@ -169,7 +169,12 @@ Para acessar a MIB Khomp e Asterisk digite o comando:
 
 Dando o comando `ls` podera vizualizar todas as MIBS disponíveis
 
- 
+Você deve ter uma saída:
+```
+ASTERISK-MIB 
+KHOMP-MIB
+```
+
 ### Configuração Zabbix
 
 **Hosts**
