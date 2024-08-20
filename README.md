@@ -158,8 +158,13 @@ iso.3.6.1.4.1.22736.1.4.2.0 = STRING: "us"
 
 ## MIBS
 
+**Acesso as MIBS**
 
+Para acessar a MIB Khomp e Asterisk digite o comando:
 
+`cd /usr/share/snmp/mibs`
+
+Dando o comando `ls` podera vizualizar todas as MIBS disponíveis
 
  
 ### Configuração Zabbix
