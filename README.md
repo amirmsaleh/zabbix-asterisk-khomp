@@ -53,7 +53,7 @@ configura o serviço SNMP para iniciar automaticamente durante a inicialização
              
 
 Adicione ou modifique as seguintes linhas no arquivo `snmpd.conf`:
-  ```conf
+``` conf
     com2sec readonly  172.28.17.7 public
                      # define a comunidade e o endereço IP para leitura
 
@@ -81,7 +81,7 @@ Adicione ou modifique as seguintes linhas no arquivo `snmpd.conf`:
     master agentx
     agentXPerms 0660 0550 nobody nobody
                      # configura as permissões para o protocolo AgentX
-    ```
+```
 
  
   Após as alterações, reinicie o serviço SNMP para aplicar as mudanças:
