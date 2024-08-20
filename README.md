@@ -9,8 +9,15 @@ Data: 20240819
 (c) Copyright 2024, Ultrix
 
 # Introdução
+criados apartir do manual da **MIB**:
 
-Para fazer o monitoramento via SNMP **Asterisk** e **Khomp** na sua máquina disponibilizamos dois Templates Zabbix (TemplateAsterisk.json, TemplateKhomp.json) criados apartir do manual da **MIB** , para utiliza-los é nescessário:
+**KQueryServer - Manual do usuario
+Última atualização: 2022-12-21 16:51:47**
+
+**Códigos de Descrição e Estado da K3L
+Última atualização: 2023-05-31 19:55:41**
+
+Para fazer o monitoramento via SNMP **Asterisk** e **Khomp** na sua máquina disponibilizamos dois Templates Zabbix (TemplateAsterisk.json, TemplateKhomp.json) , para utiliza-los é nescessário:
   
 - Instalação do SNMP  
    - Configuração do SNMP
@@ -174,6 +181,12 @@ Você deve ter uma saída:
 ASTERISK-MIB 
 KHOMP-MIB
 ```
+
+Para vizualizar a MIB do Khomp
+
+`/etc/khomp`
+
+Realizando o comando `ls` podera vizualizar a sua KHOMP-MIB
 
 ### Configuração Zabbix
 
